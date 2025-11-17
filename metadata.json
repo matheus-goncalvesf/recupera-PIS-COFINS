@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Recupera PIS/COFINS Monofásico",
+  "description": "An application to automate the recovery of PIS/COFINS tax credits for 'Simples Nacional' companies by processing fiscal notes (XML/PDF).",
+  "requestFramePermissions": []
+}

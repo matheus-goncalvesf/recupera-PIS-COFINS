@@ -1,0 +1,70 @@
+export enum UploadStatus {
+  Pending = 'AGUARDANDO',
+  Failed = 'FALHA NO PROCESSAMENTO',
+  Processed = 'PROCESSADO',
+}
+
+export interface UploadFile {
+  id: number;
+  name: string;
+  type: 'XML' | 'PDF' | 'ZIP';
+  status: UploadStatus;
+  progress: number;
+  size: number;
+  content: string;
+}
+
+export interface InvoiceItem {
+  id: number;
+  product_code: string;
+  ncm_code: string;
+  cfop: string;
+  cst_pis: string;
+  cst_cofins: string;
+  description: string;
+  total_value: number;
+  is_monofasico: boolean;
+  classification_confidence: number;
+  classification_rule: string;
+  needs_human_review: boolean;
+}
+
+export interface Invoice {
+  id: number;
+  access_key: string;
+  issue_date: string; // "YYYY-MM-DD"
+  total_value: number;
+  items: InvoiceItem[];
+}
+
+export type AnexoType = 'anexo1' | 'anexo2' | 'anexo3' | 'anexo4' | 'anexo5';
+
+export interface CalculationInput {
+  das_paid?: number;
+  anexo?: AnexoType;
+  rbt12?: number; // Receita Bruta Total dos últimos 12 meses
+}
+
+
+export interface CalculationResult {
+  competence_month: string; // "YYYY-MM"
+  total_revenue: number;
+  monofasico_revenue: number;
+  das_paid: number;
+  effective_aliquot: number;
+  recalculated_das_due: number;
+  credit_amount: number;
+}
+
+export interface Company {
+    id: string;
+    name: string;
+    cnpj: string;
+}
+
+export interface CompanyData {
+    company: Company;
+    uploadedFiles: UploadFile[];
+    invoices: Invoice[];
+    calculation_inputs: Record<string, CalculationInput>; // Keyed by competence_month "YYYY-MM"
+}

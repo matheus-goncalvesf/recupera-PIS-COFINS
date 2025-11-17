@@ -8,7 +8,7 @@ const findChild = (parent: Element | undefined | null, localName: string): Eleme
 };
 
 // Helper to get text content from a direct child
-const getChildText = (parent: Element | undefined, localName: string, defaultValue: string = ''): string => {
+const getChildText = (parent: Element | undefined | null, localName: string, defaultValue: string = ''): string => {
     const child = findChild(parent, localName);
     return child?.textContent ?? defaultValue;
 };
